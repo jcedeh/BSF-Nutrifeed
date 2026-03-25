@@ -94,7 +94,7 @@ export const login_service = async (data)=> {
 
 //activate user account
 
-export const verify_email_service = async (activation_token) => {
+export const verify_email_service = async ({activation_token}) => {
   // 1. Find user with valid token
   const user = await User.findOne({
     verification_token: activation_token,

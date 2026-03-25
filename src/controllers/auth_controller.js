@@ -27,7 +27,7 @@ export const login_controller = catchAsync(async(req, res)=> {
 
 //verify email controller
 export const verify_account_controller = catchAsync(async(req, res)=> {
-    const {token} = req.query;
-    await verify_email_service({token});
+    const {activation_token} = req.query;
+    await verify_email_service({activation_token});
     res.status(200).json({message: "user activated successfully"});
 });
