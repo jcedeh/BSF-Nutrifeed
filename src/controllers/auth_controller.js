@@ -23,3 +23,10 @@ export const login_controller = catchAsync(async(req, res)=> {
     const token = await login_service({email, password});
     res.status(200).json({message: "login successfully", data: token})
 });
+
+//activate account controller
+export const activate_account_controller = catchAsync(async(req, res)=> {
+    const token = req.query;
+    await activate_account_service(token);
+    res.status(200).json({message: "user activated successfully"});
+});
