@@ -7,7 +7,7 @@ import { sign_up_service,
 export const sign_up_controller = catchAsync(async(req, res)=> {
     const {first_name, last_name, email, password} = req.body;
     const user = await sign_up_service({first_name, last_name, email, password});
-    res.status(201).json({message: 'sign up successfully',
+    res.status(201).json({message: "Signup successful. Please check your email to verify your account.",
         data:
             {
                 first_name: user.first_name,
