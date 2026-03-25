@@ -1,0 +1,13 @@
+BSF stands for black soldier fly, an insects that its larvae has great economical value 
+due to its proteinous nature to animals like poultry, fishes and even pigs.
+These larvae acts on spoilt left over feeds at a very high rate, the more they act on it,
+the faster they grow in size within a short period of time; mostly betweeen 14-21 days. 
+Farmers that engage on BSF Farming make huge revenue from this endeavour because it doesnt 
+take much capital to set up because spoilt foods are easily available at little or no cost, 
+while the infrastructural set up are mostly locally sourced paint buckets, woods and nets.
+
+The aim of this backend project is to provide a platform that would enable the Farmer
+to easily manage and monitor the farming production activities that is been carried out
+in the farm. This app will provide a seamless tracking of BSF farming activities for a
+wide range of different batches. It will provide features such as batch initialization,
+feeding activities, recommendations, harvesting and overall production analytics.
