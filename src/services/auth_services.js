@@ -32,7 +32,6 @@ export const sign_up_service = async (data)=> {
         last_name,
         email,
         password : hashed_password,
-        confirm_password : hashed_password,
         verification_token : activation_token,
         verification_token_expires : Date.now() + 1000 * 60 * 60// 1 hour
     });

@@ -10,6 +10,6 @@ const router = express.Router();
 
 router.post("/sign_up", validateRequest(signup_schema), sign_up_controller);
 router.post("/login", validateRequest(login_schema), login_controller);
-router.post("/verify-email", activate_account_controller);
+router.get("/verify-email", activate_account_controller);
 
 export default router;
