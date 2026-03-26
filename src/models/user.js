@@ -27,8 +27,12 @@ const userSchema = new mongoose.Schema({
     default: false
   },
 
-  verification_token: String,
-  verification_token_expires: Date
+  verification_token: {
+    type: String
+  },
+  verification_token_expires: {
+    type: Date
+  }
 },
     {
         versionKey: false,

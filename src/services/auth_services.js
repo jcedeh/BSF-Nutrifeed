@@ -35,13 +35,12 @@ export const sign_up_service = async (data)=> {
         password : hashed_password,
         confirm_password : hashed_password,
         verification_token : activation_token,
-        verification_token_expires : Date.now() + 1000 * 60 * 60// 1 hour
+        verification_token_expires : Date.now() + 2000 * 60 * 60// 1 hour
     });
     
     
 //send verification email
-    const verificationLink = `${process.env.BASE_URL}/api/auth/verify-email?token=${activation_token}`;
-
+   const verificationLink = `${process.env.BASE_URL}/api/auth/verify-email?token=${encodeURIComponent(new_user.verification_token)}`;
     await sendEmail({
         to: email,
         subject: "VERIFY YOUR EMAIL",
@@ -94,30 +93,32 @@ export const login_service = async (data)=> {
 
 //activate user account
 
-export const verify_email_service = async ({activation_token}) => {
-  // 1. Find user with valid token
+
+export const verify_email_service = async (rawToken) => {
+  if (!rawToken || typeof rawToken !== 'string') {
+    throw new AppError('Verification token is required', 400);
+  }
+
+  const token = rawToken.trim();
+
+  // look up by token + expiry
   const user = await User.findOne({
-    verification_token: activation_token,
+    verification_token: token,
     verification_token_expires: { $gt: Date.now() },
   });
 
   if (!user) {
-    throw new Error("Invalid or expired verification token");
+    throw new AppError('Invalid or expired verification token', 400);
   }
 
-  // 2. Activate user
   user.is_verified = true;
-
-  // 3. Remove token fields
   user.verification_token = undefined;
   user.verification_token_expires = undefined;
-
   await user.save();
 
-  return {
-    message: "Email verified successfully",
-  };
+  return { message: 'Email verified successfully' };
 };
+
 
 //forget password
 export const forget_password_service = async (data)=> {

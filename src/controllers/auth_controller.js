@@ -26,8 +26,25 @@ export const login_controller = catchAsync(async(req, res)=> {
 });
 
 //verify email controller
-export const verify_account_controller = catchAsync(async(req, res)=> {
-    const {activation_token} = req.query;
-    await verify_email_service({activation_token});
-    res.status(200).json({message: "user activated successfully"});
+export const verify_account_controller = catchAsync(async (req, res) => {
+  let token = req.query.token || req.body.token;
+
+  if (token && typeof token === 'object' && token.token) {
+    token = token.token;
+  }
+  console.log("Received token:", token); // Debugging log
+
+  if (!token || typeof token !== 'string') {
+    return res.status(400).json({
+      status: 'fail',
+      message: 'Verification token is required and must be a string',
+    });
+  }
+
+  await verify_email_service(token);
+
+  res.status(200).json({
+    status: 'success',
+    message: 'User activated successfully',
+  });
 });
