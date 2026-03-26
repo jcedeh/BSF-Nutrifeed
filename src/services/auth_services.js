@@ -77,10 +77,9 @@ export const login_service = async (data)=> {
     }
     //check if user is verified
     if (!existing_user.is_verified) {
-    return res.status(403).json({
-    message: "Please verify your email before logging in"
-  });
-}
+        throw new AppError("Please verify your email before logging in", 403);
+  };
+
     const token = jwt.sign({
         user_id : existing_user._id,
         first_name : existing_user.first_name,
