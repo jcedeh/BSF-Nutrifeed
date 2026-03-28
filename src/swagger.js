@@ -14,6 +14,13 @@ const options = {
       }
     ],
     components: {
+        securitySchemes: {
+            bearerAuth: {
+            type: "http",
+            scheme: "bearer",
+            bearerFormat: "JWT"
+            }
+  },
       schemas: {
         SignupInput: {
           type: "object",
@@ -93,7 +100,31 @@ const options = {
               example: "NewPassword123"
             }
           }
-        }
+        },
+
+        Batch: {
+            type: "object",
+            required: ["start_date", "total_waste", "larva_quantity"],
+            properties: {
+                id: {
+                type: "string",
+                example: "64f1a2b3c4d5e6f7g8h9i0"
+                },
+                start_date: {
+                type: "string",
+                format: "date",
+                example: "2026-03-28"
+                },
+                total_waste: {
+                type: "number",
+                example: 50
+                },
+                larva_quantity: {
+                type: "number",
+                example: 2000
+                }
+            }
+}
       }
     },
     paths: {
@@ -228,7 +259,11 @@ const options = {
             }
           }
         }
-      }
+      },
+      //BATCH ENDPOINTS
+  
+
+
     }
   },
   apis: ["./src/routes/*.js"]

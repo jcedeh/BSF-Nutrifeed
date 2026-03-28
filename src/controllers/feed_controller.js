@@ -17,15 +17,15 @@ export const get_feed_history_controller = async (req, res) => {
 };
 
 export const update_feed_controller = async (req, res) => {
-    const { feed_id } = req.params;
-    const data = req.body;
-    const updated_feed = await update_feed(feed_id, data);
+    const { batch_id } = req.params;
+    const waste = req.body;
+    const updated_feed = await update_feed(batch_id, waste);
     res.status(200).json({ message: "Feed record updated", updated_feed });
 };
 
 export const delete_feed_controller = async (req, res) => {
-    const { feed_id } = req.params;
-    await delete_feed(feed_id);
+    const { batch_id } = req.params;
+    await delete_feed(batch_id);
     res.status(200).json({ message: "Feed record deleted" });
 };
 
