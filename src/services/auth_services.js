@@ -12,9 +12,10 @@ export const sign_up_service = async (data)=> {
         last_name,
         email,
         password,
-        confirm_password
+        confirm_password,
+        role
     } = data;
-    if(!first_name||!last_name||!email||!password) {
+    if(!first_name||!last_name||!email||!password ||!confirm_password || !role) {
         throw new AppError("all fields are required")
     }
     //check if email exist
@@ -34,6 +35,7 @@ export const sign_up_service = async (data)=> {
         email,
         password : hashed_password,
         confirm_password : hashed_password,
+        role: role,
         verification_token : activation_token,
         verification_token_expires : Date.now() + 2000 * 60 * 60// 1 hour
     });
@@ -85,7 +87,7 @@ export const login_service = async (data)=> {
         first_name : existing_user.first_name,
         last_name: existing_user.last_name,
         email : existing_user.email
-    }, process.env.JWT_SECRET, {expiresIn: 1})
+    }, process.env.JWT_SECRET, {expiresIn: '1h'})
 
     return token;
 }
@@ -98,11 +100,11 @@ export const verify_email_service = async (rawToken) => {
     throw new AppError('Verification token is required', 400);
   }
 
-  const token = rawToken.trim();
+  const email_token = rawToken.trim();
 
   // look up by token + expiry
   const user = await User.findOne({
-    verification_token: token,
+    verification_token: email_token,
     verification_token_expires: { $gt: Date.now() },
   });
 

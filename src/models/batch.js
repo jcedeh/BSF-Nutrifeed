@@ -1,11 +1,7 @@
 import mongoose from 'mongoose';
 
 const batchSchema = new mongoose.Schema({
-    batch_code: {
-        type: String,
-        required: true,
-        unique: true 
-    },
+
     start_date: {
         type: Date,
         default: Date.now,

@@ -6,14 +6,15 @@ import { sign_up_service,
 
 //sign up controller
 export const sign_up_controller = catchAsync(async(req, res)=> {
-    const {first_name, last_name, email, password, confirm_password} = req.body;
-    const user = await sign_up_service({first_name, last_name, email, password, confirm_password});
+    const {first_name, last_name, email, password, confirm_password, role} = req.body;
+    const user = await sign_up_service({first_name, last_name, email, password, confirm_password, role});
     res.status(201).json({message: "Signup successful. Please check your email to verify your account.",
         data:
             {
                 first_name: user.first_name,
                 last_name: user.last_name,
-                email: user.email
+                email: user.email,
+                role: user.role
             }
     });
 });
