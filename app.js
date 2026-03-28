@@ -6,8 +6,14 @@ import feed_route from './src/routes/feed_route.js';
 import recommendation_route from './src/routes/recommendation_route.js';
 import harvest_route from './src/routes/harvest_route.js';
 import analytics_route from './src/routes/analytics_route.js';
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./src/swagger.js";
 
 const app = express();
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+
 
 //include json middleware
 app.use(express.json());

@@ -10,7 +10,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:5000"
+        url: "https://bsf-nutrifeed-1.onrender.com"
       }
     ],
     components: {
@@ -97,7 +97,7 @@ const options = {
       }
     },
     paths: {
-      "/auth/signup": {
+      "/api/auth/signup": {
         post: {
           tags: ["Auth"],
           summary: "User Sign Up",
@@ -122,7 +122,7 @@ const options = {
         }
       },
 
-      "/auth/login": {
+      "/api/auth/login": {
         post: {
           tags: ["Auth"],
           summary: "User Login",
@@ -147,7 +147,7 @@ const options = {
         }
       },
 
-      "/auth/verify-email": {
+      "/api/auth/verify-email": {
         get: {
           tags: ["Auth"],
           summary: "Verify Email",
@@ -172,7 +172,7 @@ const options = {
         }
       },
 
-      "/auth/request-password-reset": {
+      "/api/auth/request-password-reset": {
         post: {
           tags: ["Auth"],
           summary: "Request Password Reset",
@@ -205,7 +205,7 @@ const options = {
         }
       },
 
-      "/auth/reset-password": {
+      "/api/auth/reset-password": {
         post: {
           tags: ["Auth"],
           summary: "Reset Password",
