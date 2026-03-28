@@ -1,7 +1,8 @@
 import { catchAsync } from "../utils/catchAsync.js";
 import { sign_up_service,
          login_service,
-         verify_email_service
+         verify_email_service,
+         forget_password_service
  } from "../services/auth_services.js";
 
 //sign up controller
@@ -48,4 +49,18 @@ export const verify_account_controller = catchAsync(async (req, res) => {
     status: 'success',
     message: 'User activated successfully',
   });
+});
+
+//forgot password controller
+export const forget_password_controller = catchAsync(async (req, res) => {
+    const {email} = req.body;
+    await forget_password_service({email});
+    res.status(200).json({message: "Password reset instructions sent to your email"});
+});
+
+//reset password controller
+export const reset_password_controller = catchAsync(async (req, res) => {
+    const {email, new_password, confirm_password} = req.body;
+    await update_password_service({email, new_password, confirm_password});
+    res.status(200).json({message: "Password updated successfully"});
 });

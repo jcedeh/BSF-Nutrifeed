@@ -8,6 +8,11 @@ import harvest_route from './src/routes/harvest_route.js';
 import analytics_route from './src/routes/analytics_route.js';
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./src/swagger.js";
+import helmet from "helmet";
+import morgan from "morgan";
+import cors from "cors";
+
+
 
 const app = express();
 
@@ -15,8 +20,21 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 
 
-//include json middleware
-app.use(express.json());
+  //body parser with size limit to prevent large payload attacks
+app.use(express.json({ limit: "10kb" })); // prevent large payload attacks
+
+//cors configuration
+app.use(cors({
+  origin: "*", // allow all (good for open API)
+  methods: ["GET", "POST", "PUT", "DELETE"],
+}));
+
+
+//security headers
+app.use(helmet());
+
+//morgan for logging
+app.use(morgan("dev"));
 
 //test router
 app.get('/health', (req, res) => {
